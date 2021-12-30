@@ -18,7 +18,7 @@ from collections import Counter
 
 tickers = ["ABB","ALFA","ALIV_SDB","ASSA_B","ATCO_A","AZN","BOL","ELUX_B","ERIC_B","ESSITY_B","EVO","GETI_B","HEXA_B","HM_B","NDA_SE","SAND","SCA_B","SEB_A", \
            "SHB_A","SINCH","SKA_B","SKF_B","SWED_A","SWMA","TEL2_B","TELIA","VOLV_B"]
-
+    
 long_short_returns = {}
 
 for x in tickers:

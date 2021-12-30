@@ -16,8 +16,9 @@ from dateutil import parser
 from statsmodels.graphics.tsaplots import plot_acf
 from collections import Counter
 
-tickers = ["EVO", "SINCH", "NIBE_B", "EQT", "MIPS", "STORY_B", "SF", "PDX", "SBB_B", "BALD_B", "SAGA_B", "KIND_SDB"]
-tickers = ["ONCO"]
+tickers = ["ABB","ALFA","ALIV_SDB","ASSA_B","ATCO_A","AZN","BOL","ELUX_B","ERIC_B","ESSITY_B","EVO","GETI_B","HEXA_B","HM_B","NDA_SE","SAND","SCA_B","SEB_A", \
+           "SHB_A","SINCH","SKA_B","SKF_B","SWED_A","SWMA","TEL2_B","TELIA","VOLV_B"]
+    
 long_short_returns = {}
 
 for x in tickers:
@@ -52,7 +53,9 @@ for x in tickers:
     volume = data.groupby(["DatePart"]).sum()["Volume"]
     adv = volume.rolling(20).mean().shift(1)
     
-    high_volume_bar = data["Volume"] > 4*data["Volume"].rolling(1000).mean().shift(1)
+    
+    
+    high_volume_bar = data["Volume"] > 12*data["Volume"].rolling(1000).mean().shift(1)
     bar_return = data["close"]/data["open"]-1
     not_open = (data["TimePart"] != "09:00:00") & (data["TimePart"] != "09:15:00") 
     not_close = (data["TimePart"] != "17:15:00") & (data["TimePart"] != "17:00:00")
@@ -89,7 +92,7 @@ for x in tickers:
     
     #calculate returns
     comm = 0.0002
-    slippage = 0.2/100
+    slippage = 0.1/100
     long_strat_returns = long_exit_price.div(long_entry_price.values)-1-comm*2-slippage
     short_strat_returns = -(short_exit_price.div(short_entry_price.values)-1)-comm*2-slippage
     
